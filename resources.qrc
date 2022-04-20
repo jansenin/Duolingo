@@ -1,0 +1,5 @@
+<RCC>
+    <qresource>
+        <file>Resources/Questions/pick_an_option_questions.json</file>
+    </qresource>
+</RCC>
