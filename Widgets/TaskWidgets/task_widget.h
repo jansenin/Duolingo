@@ -5,6 +5,7 @@
 #include <QVBoxLayout>
 #include <QRadioButton>
 #include <QLabel>
+#include <QProgressBar>
 
 class TaskWidget : public QWidget {
   Q_OBJECT
@@ -16,16 +17,22 @@ class TaskWidget : public QWidget {
   bool IsAnswerRevealed() const;
 
   [[nodiscard]] int TasksLeft() const;
+  void SetTasksLeft(int tasks_left);
 
  signals:
 
   void AnsweredCorrectly();
   void AnsweredIncorrectly();
+  void NextTaskClicked();
 
  protected:
   QVBoxLayout* layout_;
   QPushButton* answer_button_;
   QLabel* question_text;
-  int tasks_left_;
+  QProgressBar* progress_bar_;
+  QPushButton* finish_button_;
   bool is_answer_revealed;
+
+ private:
+  int tasks_left_;
 };

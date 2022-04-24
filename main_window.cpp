@@ -41,7 +41,9 @@ MainWindow::MainWindow(QWidget* parent)
 void MainWindow::OnPageIdChanged(int previous) {
   if (Model::Instance()->GetPageId() == Model::PageId::kMainPage) {
     stacked_widget_->setCurrentWidget(main_page_);
+    menuBar()->show();
   } else if (Model::Instance()->GetPageId() == Model::PageId::kTaskPage) {
+    menuBar()->hide();
     tasks_page_->Reset(Model::Instance()->GetTasksMode(), 1, 3);
     stacked_widget_->setCurrentWidget(tasks_page_);
   }

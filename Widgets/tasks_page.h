@@ -5,6 +5,7 @@
 
 #include "tasks_mode.h"
 #include "TaskWidgets/task_widget.h"
+#include <Widgets/number_label.h>
 
 class TasksPage : public QWidget {
  public:
@@ -12,6 +13,7 @@ class TasksPage : public QWidget {
   TasksPage(const TasksMode& tasks_mode, int attempts, int tasks_count);
 
   void Reset(const TasksMode& tasks_mode, int attempts, int tasks_count);
+  void SetAttemptsLeft(int attempts);
 
  private:
   TaskWidget* GenerateNewTaskWidget(int tasks_count);
@@ -21,4 +23,5 @@ class TasksPage : public QWidget {
   TaskWidget* current_task_;
   TasksMode tasks_mode_;
   int attempts_left_;
+  NumberLabel* attempts_label_;
 };

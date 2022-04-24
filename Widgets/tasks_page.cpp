@@ -6,14 +6,17 @@
 TasksPage::TasksPage()
   : QWidget()
   , layout_(new QVBoxLayout())
-  , current_task_(nullptr) {
+  , current_task_(nullptr)
+  , attempts_label_(new NumberLabel("Оставшиеся попытки : ", 0)){
   setLayout(layout_);
+  layout_->addWidget(attempts_label_);
 }
 
 TasksPage::TasksPage(
     const TasksMode& tasks_mode,
     int attempts,
     int tasks_count) : TasksPage() {
+  SetAttemptsLeft(attempts);
   tasks_mode_ = tasks_mode;
   attempts_left_ = attempts;
 
@@ -28,26 +31,25 @@ void TasksPage::ConnectCurrentTaskWidget() {
       current_task_->ShowCorrectAnswer();
       return;
     }
-    if (current_task_->TasksLeft() <= 0) {
-      Model::Instance()->SetScore(Model::Instance()->Score() + 1);
-      Model::Instance()->SetPageId(Model::PageId::kMainPage);
-    } else {
-      current_task_->NextQuestion();
-    }
   });
   connect(current_task_, &TaskWidget::AnsweredIncorrectly, [this](){
-    if (current_task_->TasksLeft() == 0) {
-      Model::Instance()->SetPageId(Model::PageId::kMainPage);
-    }
-
+    SetAttemptsLeft(attempts_left_ - 1);
     if (!current_task_->IsAnswerRevealed()) {
       current_task_->ShowCorrectAnswer();
       return;
     }
-    --attempts_left_;
-    if (attempts_left_ < 0) {
+  });
+  connect(current_task_, &TaskWidget::NextTaskClicked, [this](){
+    if (attempts_left_ <= 0) {
       Model::Instance()->SetPageId(Model::PageId::kMainPage);
+      return;
     }
+    if (current_task_->TasksLeft() == 0) {
+      Model::Instance()->SetScore(Model::Instance()->Score() + 1);
+      Model::Instance()->SetPageId(Model::PageId::kMainPage);
+      return;
+    }
+    current_task_->NextQuestion();
   });
 }
 
@@ -56,7 +58,8 @@ void TasksPage::Reset(
     int attempts,
     int tasks_count) {
   tasks_mode_ = tasks_mode;
-  attempts_left_ = attempts;
+  SetAttemptsLeft(attempts);
+  attempts_label_->SetNumber(attempts_left_);
   if (current_task_ != nullptr) {
     current_task_->deleteLater();
   }
@@ -79,4 +82,9 @@ TaskWidget* TasksPage::GenerateNewTaskWidget(int tasks_count) {
     return nullptr;
   }
   return nullptr;
+}
+
+void TasksPage::SetAttemptsLeft(int attemps) {
+  attempts_left_ = attemps;
+  attempts_label_->SetNumber(attempts_left_);
 }

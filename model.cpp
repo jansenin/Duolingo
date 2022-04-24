@@ -1,7 +1,5 @@
 #include "model.h"
 
-#include <iostream>
-
 #include <QSettings>
 
 const QString Model::kScoreSettingName = "score";
@@ -36,9 +34,6 @@ enum Model::PageId Model::GetPageId() const {
 }
 
 void Model::SetPageId(enum Model::PageId page_id) {
-  std::cout << "Model:" << std::endl;
-  std::cout << "\tIs main page : " << (page_id == kMainPage) << std::endl;
-  std::cout << "\tIs tasks page : " << (page_id == kTaskPage) << std::endl;
   enum PageId previous = page_id_;
   page_id_ = page_id;
   if (previous != page_id) {

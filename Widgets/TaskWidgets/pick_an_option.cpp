@@ -15,15 +15,17 @@ PickAnOption::PickAnOption(int tasks_count, QWidget* parent)
   h_layout2->setAlignment(Qt::AlignCenter);
   h_layout2->addWidget(question_text);
 
+  layout_->addWidget(finish_button_);
   layout_->addLayout(h_layout2);
   layout_->addLayout(h_layout1);
   layout_->addWidget(answer_button_);
+  layout_->addWidget(progress_bar_);
 
   NextQuestion();
 
   connect(answer_button_, &QPushButton::clicked, [this](){
-    if (is_answer_revealed && tasks_left_ > 0) {
-      NextQuestion();
+    if (is_answer_revealed) {
+      emit NextTaskClicked();
       return;
     }
 
@@ -56,7 +58,7 @@ void PickAnOption::NextQuestion() {
   }
   radio_buttons_.clear();
   question_index_++;
-  tasks_left_--;
+  SetTasksLeft(TasksLeft() - 1);
   for (int i = 0 ; i < questions_[question_index_]->answers.size() ; ++i) {
     QRadioButton* radio_button = new QRadioButton();
     radio_button->setText(questions_[question_index_]->answers[i]);
