@@ -20,6 +20,6 @@ add_executable(Laba5
         main_window.cpp
         Widgets/main_page.cpp
         model.cpp
-        tasks_mode.cpp Widgets/number_label.cpp Widgets/number_label.h Widgets/TaskWidgets/pick_an_option.cpp Widgets/TaskWidgets/pick_an_option.h Widgets/tasks_page.cpp Widgets/tasks_page.h Widgets/TaskWidgets/task_widget.cpp Widgets/TaskWidgets/task_widget.h QuestionLoaders/pick_an_option_question_loader.cpp QuestionLoaders/pick_an_option_question_loader.h)
+        tasks_mode.cpp Widgets/number_label.cpp Widgets/number_label.h Widgets/TaskWidgets/pick_an_option.cpp Widgets/TaskWidgets/pick_an_option.h Widgets/tasks_page.cpp Widgets/tasks_page.h Widgets/TaskWidgets/task_widget.cpp Widgets/TaskWidgets/task_widget.h QuestionLoaders/pick_an_option_question_loader.cpp QuestionLoaders/pick_an_option_question_loader.h Widgets/score_label.cpp Widgets/score_label.h)
 
 target_link_libraries(Laba5 Qt::Core Qt::Gui Qt::Widgets)

@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget* parent)
     , main_page_(new MainPage())
     , tasks_page_(new TasksPage())
     , score_label_(
-        new NumberLabel("Очки : ", Model::Instance()->Score())) {
+        new ScoreLabel("Очки : ", Model::Instance()->Score())) {
   stacked_widget_->addWidget(main_page_);
   stacked_widget_->addWidget(tasks_page_);
   stacked_widget_->setCurrentWidget(main_page_);
@@ -32,7 +32,6 @@ MainWindow::MainWindow(QWidget* parent)
       [this](){ score_label_->SetNumber(Model::Instance()->Score()); });
 
   menuBar()->setCornerWidget(score_label_);
-  //menuBar()->layout()->addWidget(score_label_);
 
   SetupMenu();
 }

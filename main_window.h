@@ -6,6 +6,7 @@
 #include "Widgets/main_page.h"
 #include "model.h"
 #include "Widgets/tasks_page.h"
+#include "Widgets/score_label.h"
 
 class MainWindow : public QMainWindow {
  public:
@@ -22,5 +23,5 @@ class MainWindow : public QMainWindow {
   MainPage* main_page_;
   TasksPage* tasks_page_;
 
-  NumberLabel* score_label_;
+  ScoreLabel* score_label_;
 };
