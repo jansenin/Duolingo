@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget* parent)
     , tasks_page_(new TasksPage())
     , score_label_(
         new ScoreLabel("Очки : ", Model::Instance()->Score())) {
+  setWindowIcon(QIcon(":/Resources/icon.ico"));
+
   stacked_widget_->addWidget(main_page_);
   stacked_widget_->addWidget(tasks_page_);
   stacked_widget_->setCurrentWidget(main_page_);

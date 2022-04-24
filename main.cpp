@@ -1,7 +1,6 @@
 #include <QApplication>
 #include <QTranslator>
 #include <QCloseEvent>
-#include <QWidget>
 
 #include "main_window.h"
 #include "QuestionLoaders/pick_an_option_question_loader.h"
