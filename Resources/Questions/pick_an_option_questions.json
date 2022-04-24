@@ -1,0 +1,33 @@
+{
+  "questions": [
+    {
+      "text": "Test question 1 text",
+      "answers": [
+        "question 1 answer 1",
+        "question 1 answer 2"
+      ],
+      "correctAnswerIndex": 0
+    },
+
+    {
+      "text": "Test question 2 text",
+      "answers": [
+        "question 2 answer 1",
+        "question 2 answer 2",
+        "question 2 answer 3",
+        "question 2 answer 4"
+      ],
+      "correctAnswerIndex": 1
+    },
+
+    {
+      "text": "Test question 3 text",
+      "answers": [
+        "question 3 answer 1",
+        "question 3 answer 2",
+        "question 3 answer 3"
+      ],
+      "correctAnswerIndex": 2
+    }
+  ]
+}
