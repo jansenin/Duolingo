@@ -17,7 +17,7 @@ MainPage::MainPage(QWidget* parent)
   mode_selector_->addItem(TM::kAudioString);
   mode_selector_->addItem(TM::kMixedString);
 
-  connect(close_button_, &QPushButton::clicked, this, &MainPage::close);
+  connect(close_button_, &QPushButton::clicked, [this](){window()->close();});
   connect(
       go_button_,
       &QPushButton::clicked,
@@ -29,6 +29,7 @@ MainPage::MainPage(QWidget* parent)
 
   main_layout_->addWidget(mode_selector_);
   main_layout_->addWidget(go_button_);
+  main_layout_->addWidget(close_button_);
 
   mode_selector_->setCurrentIndex(0);
   Model::Instance()->SetTasksMode(TM(mode_selector_->currentText()));

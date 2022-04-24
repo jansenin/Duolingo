@@ -22,7 +22,7 @@ PickAnOption::PickAnOption(int tasks_count, QWidget* parent)
   NextQuestion();
 
   connect(answer_button_, &QPushButton::clicked, [this](){
-    if (is_answer_revealed) {
+    if (is_answer_revealed && tasks_left_ > 0) {
       NextQuestion();
       return;
     }
@@ -54,10 +54,11 @@ void PickAnOption::NextQuestion() {
   for (QRadioButton* radio_button : radio_buttons_) {
     radio_button->deleteLater();
   }
+  radio_buttons_.clear();
   question_index_++;
   tasks_left_--;
   for (int i = 0 ; i < questions_[question_index_]->answers.size() ; ++i) {
-    QRadioButton* radio_button = new QRadioButton(this);
+    QRadioButton* radio_button = new QRadioButton();
     radio_button->setText(questions_[question_index_]->answers[i]);
     radio_buttons_.push_back(radio_button);
 

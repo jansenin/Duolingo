@@ -6,6 +6,7 @@
 #include <QMenu>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QGridLayout>
 
 #include "number_label.h"
 

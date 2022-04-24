@@ -54,6 +54,7 @@ void MainWindow::closeEvent(QCloseEvent* event) {
 
   if (answer == QMessageBox::Yes) {
     event->accept();
+    delete Model::Instance();
   } else if (answer == QMessageBox::No) {
     event->ignore();
   }
@@ -87,4 +88,11 @@ void MainWindow::SetupMenu() {
       reset_score,
       &QAction::triggered,
       [] { Model::Instance()->SetScore(0); });
+
+  auto* close = menu->addAction("Выйти");
+  connect(
+      close,
+      &QAction::triggered,
+      [this] { this->close(); });
+  close->setShortcut(QKeySequence::Close);
 }

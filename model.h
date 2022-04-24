@@ -2,6 +2,7 @@
 
 #include <QString>
 #include <QObject>
+#include <QSettings>
 
 #include "tasks_mode.h"
 
@@ -49,4 +50,5 @@ class Model : public QObject {
   enum PageId page_id_;
   bool sound_;
   TasksMode tasks_mode_;
+  QSettings settings_;
 };

@@ -8,22 +8,20 @@ const QString Model::kScoreSettingName = "score";
 const QString Model::kSoundSettingName = "sound";
 Model* Model::instance_ = nullptr;
 
-Model::Model() {
+Model::Model() : settings_(QSettings("organization", "application")) {
   bool has_score;
-  int score = QSettings().value(kScoreSettingName).toInt(&has_score);
+  int score = settings_.value(kScoreSettingName).toInt(&has_score);
   score_ = has_score ? score : 0;
-  score_ = 10;
 
-  bool has_sound = !QSettings().value(kSoundSettingName).isNull();
+  bool has_sound = !settings_.value(kSoundSettingName).isNull();
   if (has_sound) {
-    sound_ = QSettings().value(kSoundSettingName).toBool();
+    sound_ = settings_.value(kSoundSettingName).toBool();
   }
 }
 
 Model::~Model() {
-  QSettings settings;
-  settings.setValue(kScoreSettingName, score_);
-  settings.setValue(kSoundSettingName, sound_);
+  settings_.setValue(kScoreSettingName, score_);
+  settings_.setValue(kSoundSettingName, sound_);
 }
 
 Model* Model::Instance() {

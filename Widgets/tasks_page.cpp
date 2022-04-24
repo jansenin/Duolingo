@@ -36,6 +36,10 @@ void TasksPage::ConnectCurrentTaskWidget() {
     }
   });
   connect(current_task_, &TaskWidget::AnsweredIncorrectly, [this](){
+    if (current_task_->TasksLeft() == 0) {
+      Model::Instance()->SetPageId(Model::PageId::kMainPage);
+    }
+
     if (!current_task_->IsAnswerRevealed()) {
       current_task_->ShowCorrectAnswer();
       return;
